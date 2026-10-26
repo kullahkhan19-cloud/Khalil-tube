@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="ps">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khalil Tube</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #202124;
+    }
+    header {
+      background: #fff;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+    }
+    .logo { font-size: 23px; font-weight: bold; color: #e62117; }
+    .search { display: flex; flex: 1; max-width: 450px; }
+    .search input {
+      width: 100%;
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px 0 0 20px;
+    }
+    button {
+      cursor: pointer;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 7px;
+      background: #e62117;
+      color: white;
+    }
+    .search button { border-radius: 0 20px 20px 0; }
+    nav { padding: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+    nav button { background: #eee; color: #222; border-radius: 18px; }
+    nav button.active { background: #222; color: white; }
+    main { padding: 10px 16px 30px; }
+    h2 { font-size: 20px; }
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+    .video { background: white; border-radius: 12px; overflow: hidden; }
+    .thumbnail {
+      height: 155px;
+      background: linear-gradient(135deg, #252525, #777);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 40px;
+    }
+    .details { padding: 12px; }
+    .details h3 { margin: 0 0 8px; font-size: 17px; }
+    .details p { color: #666; font-size: 13px; margin: 5px 0; }
+    .notice { padding: 12px; background: #fff3cd; border-radius: 8px; line-height: 1.6; }
+    footer { padding: 20px; text-align: center; color: #777; }
+    @media (max-width: 480px) {
+      header { padding: 12px 8px; flex-wrap: wrap; }
+      .logo { font-size: 19px; }
+      .search { order: 3; flex-basis: 100%; max-width: none; }
+      main { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">▶ Khalil Tube</div>
+    <div class="search">
+      <input id="searchInput" type="search" placeholder="Search videos...">
+      <button onclick="searchVideos()">Search</button>
+    </div>
+    <button onclick="alert('Login and account creation will be connected in the next step.')">Login</button>
+  </header>
+
+  <nav>
+    <button class="active" onclick="filterVideos('all', this)">All</button>
+    <button onclick="filterVideos('education', this)">Education</button>
+    <button onclick="filterVideos('entertainment', this)">Entertainment</button>
+    <button onclick="filterVideos('technology', this)">Technology</button>
+  </nav>
+
+  <main>
+    <h2>Welcome to Khalil Tube</h2>
+    <p class="notice">
+      دلته د Khalil Tube د ویډیوګانو پاڼه ده. د خلکو د ویډیو اپلوډ، Login
+      او د ویډیوګانو د خوندي کولو سیستم به د سرور له نښلولو وروسته فعال شي.
+    </p>
+    <h2>Recommended Videos</h2>
+    <div class="videos" id="videoList">
+      <article class="video" data-category="education">
+        <div class="thumbnail">▶</div>
+        <div class="details">
+          <h3>Learn Something New</h3>
+          <p>Khalil Tube · Education</p>
+          <p>Sample video card</p>
+        </div>
+      </article>
+      <article class="video" data-category="technology">
+        <div class="thumbnail">💻</div>
+        <div class="details">
+          <h3>Technology and Creativity</h3>
+          <p>Khalil Tube · Technology</p>
+          <p>Sample video card</p>
+        </div>
+      </article>
+      <article class="video" data-category="entertainment">
+        <div class="thumbnail">🎬</div>
+        <div class="details">
+          <h3>Entertainment Videos</h3>
+          <p>Khalil Tube · Entertainment</p>
+          <p>Sample video card</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>© 2026 Khalil Tube</footer>
+
+  <script>
+    function searchVideos() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.video').forEach(video => {
+        video.style.display = video.innerText.toLowerCase().includes(query) ? '' : 'none';
+      });
+    }
+
+    function filterVideos(category, button) {
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      button.classList.add('active');
+      document.querySelectorAll('.video').forEach(video => {
+        video.style.display =
+          category === 'all' || video.dataset.category === category ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
